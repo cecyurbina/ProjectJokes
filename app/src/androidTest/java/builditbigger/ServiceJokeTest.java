@@ -20,6 +20,7 @@ import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.matcher.ViewMatchers.isClickable;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 
 /**
@@ -32,7 +33,7 @@ public class ServiceJokeTest {
     private static final String TAG = EndpointsAsyncTask.class.getSimpleName();
 
     @Test
-    public void useAppContexta() throws InterruptedException {
+    public void serviceTest() throws InterruptedException {
         final Object syncObject = new Object();
 
         EndpointsAsyncTask endpointsAsyncTask = new EndpointsAsyncTask(new OnJokeTaskCompleted() {
@@ -44,6 +45,7 @@ public class ServiceJokeTest {
             @Override
             public void onTaskCompleted(String data) {
                 assertNotNull(data);
+                assertNotEquals("", data);
                 synchronized (syncObject){
                     syncObject.notify();
                 }
